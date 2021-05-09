@@ -3,22 +3,22 @@ input = sys.stdin.readline
 
 N, S, M = list(map(int, input().split()))
 arr = list(map(int, input().split()))
-ans = 0
+dp = [[False for _ in range(M+1)] for _ in range(N+1)]
+# dp[N][S] = N 번째 리스트에서 S 볼륨이 가능한지 아닌지
+dp[0][S] = True
 
-def f(i, v):
-    global ans
+for i in range(1, N+1):
+    for j in range(M+1):
+        if dp[i-1][j] and j - arr[i-1] >= 0:
+            dp[i][j - arr[i-1]] = True
 
-    if i == N:
-        ans = max(ans, v)
-        return
+        if dp[i-1][j] and j + arr[i-1] <= M:
+            dp[i][j + arr[i-1]] = True
 
-    if v + arr[i] <= M:
-        f(i+1, v + arr[i])
+ans = -1
+for i in range(M, -1, -1):
+    if dp[N][i]:
+        ans = i
+        break
 
-    if v - arr[i] >= 0:
-        f(i+1, v - arr[i])
-
-f(0, S)
 print(ans)
-
-# f(i) = max(f(i-1, on)의 최대값, f(i-1, off)의 최대값) + V or - V
