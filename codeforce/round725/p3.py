@@ -1,34 +1,23 @@
 import sys
-from bisect import bisect_left
+from bisect import bisect_left, bisect_right
 input = sys.stdin.readline
+
+ans = []
 
 t = int(input())
 for _ in range(t):
     n, l, r = list(map(int, input().split()))
-    arr = list(map(int, input().split()))
-    arr.sort()
-    # print(arr)
+    v = list(map(int, input().split()))
+    v.sort()
     
-    ans = 0
+    ret = 0
     for i in range(n):
-        lower = bisect_left(arr, l - arr[i])
-        upper = bisect_left(arr, r - arr[i])
-        if i < lower:
-            ans += upper - lower
-        elif i < upper:
-            if upper == n:
-                ans += upper - i - 1
-            else:
-                ans += upper - i
+        lower = bisect_left(v, l - v[i]) + 1
+        upper = bisect_right(v, r - v[i]) + 1
+        if l <= 2 * v[i] <= r:
+            ret -= 1
+        ret += upper - lower
+    ans.append(ret // 2)
 
-    print(ans)
-
-# 4
-# 3 4 7
-# 5 1 2
-# 5 5 8
-# 5 1 2 4 3
-# 4 100 1000
-# 1 1 1 1
-# 5 9 13
-# 2 5 5 1 1
+for el in ans:
+    print(el)
