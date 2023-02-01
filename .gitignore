@@ -9,6 +9,7 @@
 
 # cph
 .cph
+*.bin
 
 # private files
 private[.-]*
