@@ -5,6 +5,20 @@ using namespace std;
 // 최대값 세그먼트 트리를 만든 다음에
 // 구간 [L, R]에 대해서 value보다 작은 수의 개수를 구한다.
 // 그 개수를 모두 더하면 정답임
+
+struct segtree {
+    int size;
+    vector<int> tree;
+
+    segtree(int n) {
+        int sz = 1;
+        while(sz < n) sz <<= 1;
+        size = sz * 2;
+        tree.resize(size, 0);
+    }
+
+};
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
