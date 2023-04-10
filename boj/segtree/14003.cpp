@@ -74,7 +74,7 @@ int main() {
             ans = ret+1;
             max_index = idx;
         }
-        seg.update(idx-1, ret+1);
+    seg.update(idx-1, ret+1);
     }
 
     vector<int> lis;
