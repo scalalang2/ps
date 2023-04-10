@@ -4,7 +4,6 @@ using namespace std;
 
 int n;
 vector<pair<int, int>> v;
-
 struct segtree {
     int size;
     vector<int> tree;
